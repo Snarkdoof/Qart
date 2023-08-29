@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+</head>
+
+  <script src="https://code.responsivevoice.org/responsivevoice.js?key=0cFhIMi5"></script>
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+<style>
+
+body {
+    background: black;
+    margin: 0px;
+    font-family: sans-serif;
+    height: 100%;
+    width: 100%;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 1;
+}
+
+.background {
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center center;
+    opacity: 0.7;
+    -webkit-filter: blur(50px);
+}
+
+.blacken {
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    opacity: 0.3;
+    background: #000000;
+}
+
+.art {
+    position: absolute;
+    width: 90%;
+    height: 90%;
+    left: 5%;
+    top: 5%;
+    background-size: cover;
+    background-position: center center;
+    //background: #00000060;
+}
+
+.infobox {
+    position: absolute;
+    max-width: 400px;
+    width: 60%;
+    height: 100%;
+    opacity: 0.98;
+    flex-wrap: wrap;
+    background: linear-gradient(90deg, var(--dark-color), #1e201d);
+    color: var(--light-color);
+    padding-left: 30px;
+    padding-right: 30px;
+    display: flex;
+    align-content: center;
+    transition: width 0.5s ease-in-out;
+    overflow: hidden;
+}
+
+.infobox.minimized {
+    width: 0px;
+    overflow: hidden;
+}
+
+#hidebox {
+    width: 100%;
+}
+
+.search {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    font-size: 40px;
+    z-index: 1000;
+}
+a {
+    color: var(--light-color2);
+}
+
+.search .icon {
+    font-size: 50px;
+}
+
+.textbox {
+    margin-bottom: 30px;
+}
+
+.title {
+    margin-top: 50px;
+    margin-bottom: 10px;
+    margin-left: -10px;
+    font-size: 1.9em;
+    font-weigth: bold;
+    font-family: serif;
+    color: var(--light-color2);
+}
+
+.titletext {
+
+}
+
+.subtitle {
+    margin-top: 25px;
+    margin-left: -10px;
+    font-size: 1.5em;
+    font-weigth: bold;
+    font-family: serif;
+    color: var(--light-color2);
+}
+
+:root {
+    --light-color: #aaaaaa;
+    --light-color2: #ffffff;
+    --dark-color: #151515;
+}
+
+
+.hidden {
+    display: none;
+}
+
+.longread_container {
+    position: absolute;
+    width: 90%;
+    height: 90%;
+    left: 5%;
+    top: 5%;
+    background-size: cover;
+    background-position: center center;
+    z-index: 10;
+}
+
+.very_blacken {
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    min-height: 100%;
+    opacity: 1;
+    background: #000000;
+}
+.longread_textarea {
+    display: none;
+    width: 80%;
+    height: 80%;
+    margin-left: 10%;
+    height: 100%;
+    max-width: 600px;
+    scroll-behavior: auto;
+    background: black;
+    color: var(--light-color);
+    display: flex;
+    flex-direction: column;
+}
+
+.longreadimage {
+    max-width: 100%;
+}
+
+.btn {
+    color: var(--light-color2);
+    background: var(--dark-color2);
+    border: solid 1px var(--light-color2);
+    margin-left: 25px;
+}
+
+.controls {
+    margin-top: 10px;
+    margin-bottom: 40px;
+    width: 90%;
+    display: flex;
+    flex-flow: row;
+    justify-content:flex-end;
+
+}
+
+    .resultlist {
+        position: absolute;
+        bottom: 10px;
+        max-height: 100px;
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+    }
+
+    .result {
+        position: relative;
+        width: 100px;
+        height: 100px;
+        background-size: cover;
+        background-position: center;
+        margin-right: 5px;
+    }
+  
+    .result.topscore {
+        display: block;
+    }
+
+    .result .info {
+        position: absolute;
+        bottom: 5px;
+        left: 5px;
+        font-size: 1.3em;
+        color: yellow;
+    }
+
+.lower_right {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+}
+
+.right {
+}
+
+.small_image {
+    max-height: 150px;
+    max-width: 300px;
+    padding: 20px;
+    float: right;
+}
+
+.header {
+    clear: right;
+}
+
+@media only screen and (min-width: 1200px) {
+
+    .longread_textarea .small_image {
+        position: absolute;
+        right: 50px;
+        max-width: calc(90% - 700px);
+        max-height: 60%;
+    }
+
+}
+
+
+</style>
+<body>
+
+<div class="container">
+    <div class="background"> </div>
+<div class="blacken"> </div>
+    <div class="art">
+        <div class="infobox">
+            <div class="search"><span class="material-symbols-outlined icon" id="searchbtn">search</span></div>
+            <div id="hidebox">
+            <div class="textbox">
+                <img class="small_image"/>
+                <div class="header">
+                    <div class="title"><span class="titletext"></span></div>
+                </div>
+                <div class="intro">
+                </div>
+                <div class="details">
+                    <div class="subtitle"></div>
+                    <span class="short_details"></span>
+                </div>
+            </div>
+            <div class="controls">
+                <button class="btn right" id="playshortbtn">Spill av</button>
+                <button class="btn hidden" id="detailsbtn">Les mer</button>
+            </div>
+        </div>
+            <div class="minimize">
+                <span class="material-symbols-outlined icon lower_right" id="minimizebtn"><span class="material-symbols-outlined">
+keyboard_double_arrow_left
+</span></span>
+                <span class="material-symbols-outlined icon lower_right hidden" id="unminimizebtn"><span class="material-symbols-outlined">
+keyboard_double_arrow_right
+</span></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="longread_container hidden">
+    <div class="very_blacken">
+        <div class="longread_textarea">
+            <div class="title"><span class="titletext"></span></div>
+<!--            <p>
+            </p>
+
+    -->     
+                <p>
+                   <img class="small_image" style="float: right"/>
+                   <div class="intro">
+                   </div>
+                   <div class="details">
+                        <div class="subtitle"></div>
+                        <span class="short_details"></span>
+                    </div>
+                </p>
+
+            <div class="detailed_text">
+            </div>
+            <div class="controls">
+                <button class="btn right" id="playlongbtn">Spill av</button>
+                <button class="btn right" id="closebtn">Lukk</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="longread_container imagesearch hidden">
+    <div class="very_blacken">
+        <video id="video" width="100%" height="100%" autoplay></video>
+        <!--<button id="click-photo">Click Photo</button>-->
+        <canvas id="canvas" width="300px" height="300px" style="display:none"></canvas>
+        <div class="controls">
+            <button class="btn" id="cancelbtn">Avbryt</button>
+        </div>
+        <div class="resultlist"></div>
+
+    </div>
+</div>
+
+<template id="resulttemplate">
+    <div class="result">
+        <img/>
+        <div class="info"></div>
+    </div>
+</template>
+
+<script>
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+          results = regex.exec(location.search);
+    return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
+function replaceExtension(filename, ext) {
+  return filename.replace(/\.[^/.]+$/, "." + ext);
+}
+
+let app = {};
+
+function load_page(resource, information) {
+    /*
+     * Format:
+     * {title: ..., intro: ..., short_text: ..., texts: [{title: ..., text: ...}, {text: ...}]} 
+     }
+     */
+     app.information = information;
+     app.resource = resource;
+
+     top.location = "#" + resource;
+     console.log("LOADING", information.title);
+
+     if (information.audio) {
+        let a = document.querySelector("audio");
+        if (!a) {
+            a = document.createElement("audio");
+            document.querySelector("body").appendChild(a);
+        }
+        a.src = information.audio[Math.floor(Math.random() * information.audio.length)];
+        a.play();
+     } else {
+        let a = document.querySelector("audio");
+        if (a) a.parentElement.removeChild(a);
+     }
+
+    document.querySelectorAll(".small_image").forEach( (i) => i.src = resource);
+    document.querySelectorAll(".titletext").forEach( (i) => i.innerHTML = information.title || "Uten tittel");
+    document.querySelectorAll(".intro").forEach( (i) => i.innerHTML = information.intro || "");
+    document.querySelectorAll(".short_details").forEach( (i) => i.innerHTML = information.short_text || "");
+
+    if (information.texts) {
+        let html = "";
+        information.texts.forEach((text) => {
+            if (text.title) {
+                html += "<div class='subtitle'>" + text.title + "</div>";
+            }
+
+            if (text.img) {
+                html += "<img class='longreadimage' src='" + text.img + "'/>"
+            }
+            if (text.text) {
+                html += "<p>" + text.text + "</p>";
+            }
+        });
+
+        document.querySelector(".detailed_text").innerHTML = html;
+        document.querySelector("#detailsbtn").classList.remove("hidden");
+    } else {
+        document.querySelector("#detailsbtn").classList.add("hidden");
+    }
+}
+
+function load_resource(resource) {
+    // If we're reading something long (e.g. pressed back button) hide details
+    document.querySelector(".longread_container").classList.add("hidden");
+
+    document.querySelector(".art").style.backgroundImage = "url('" + resource +"')";
+    document.querySelector(".background").style.backgroundImage = "url('" + resource +"')";
+    document.querySelector(".longread_container").style.backgroundImage = "url('" + resource +"')";
+
+    // Load more information
+    let _url = replaceExtension(resource, "json");
+    fetch(_url).then(e => {if (e.status == 404) throw Error("Missing page"); return e.json()})
+       .then(data => load_page(resource, data))
+       .catch(e => {
+        console.log("This didn't work, show error info", e)
+    });
+
+    // Also load colors (if possible)
+    fetch(replaceExtension(resource, "palette"))
+       .then(data => data.json())
+       .then(colors => {
+            let r = document.querySelector(":root");
+            r.style.setProperty("--light-color", colors[0].light);
+            r.style.setProperty("--light-color2", colors[1].light);
+            r.style.setProperty("--dark-color", colors[0].dark + "ee");
+            r.style.setProperty("--dark-color2", colors[1].dark);
+            console.log("Colors are", colors);
+       });
+}
+
+let rvoice = false;
+let first_speak = true;
+app.voice;
+try {
+    responsiveVoice.setDefaultVoice("Norwegian Male");
+    rvoice = true;
+} catch (err) {
+    console.log("Responsive voice failed", err);
+
+    let i = 0;
+
+    speechSynthesis.onvoiceschanged = function() {
+        console.log("STARTING text to speech subsystem");
+        window.speechSynthesis.getVoices().forEach(v => {
+            console.log(v.name);
+            if (v.name.indexOf("orwegian") > -1) {
+                alert("NORSK:" + v.name)
+                app.voice = v;
+            }
+            //if (v.name == "Google UK English Male") voice = v;
+        });
+
+        alert("Selected voice: " +  app.voice.name);
+       //document.querySelector("#start").addEventListener("click", () => {i=0;  window.speechSynthesis.cancel(); playnext()});
+
+    };
+}
+
+function stop_speaking() {
+    responsiveVoice.cancel();
+    should_speak = false;
+}
+
+function speak(text) {
+    if (!app.should_speak) return;
+
+    return new Promise((resolve, reject) => {
+        if (rvoice) {
+            console.log("Speaking with voice", responsiveVoice.default_rv.name);
+            responsiveVoice.speak(text, responsiveVoice.default_rv.name, {onend: resolve});
+            return;
+        }
+        var msg = new SpeechSynthesisUtterance();
+        msg.voice = app.voice;
+        msg.rate = 1.15;
+        msg.text = text;
+        window.speechSynthesis.speak(msg);
+        msg.onend = function() {
+            if (first_speak) {
+                first_speak = false;
+                speak(text);
+            }
+            print("RESOLVE")
+            resolve()
+        };
+    });
+}
+
+
+window.addEventListener("hashchange", (e) => load_resource(top.location.hash.substr(1)));
+
+let resource;
+if (top.location.hash) {
+    // We use the hash first
+    console.log("Loading", top.location.hash.substr(1))
+    resource = top.location.hash.substr(1);
+    load_resource(resource);
+} else {
+    top.location.hash = "#/art/skmu.jpg";
+    console.log("Updating location hash")
+    //resource = getParameterByName("res") || "/art/skmu.jpg";
+}
+//load_resource(resource)
+
+
+document.querySelector("#detailsbtn").addEventListener("click", () => {
+    document.querySelector(".longread_container").classList.remove("hidden");
+});
+
+document.querySelector("#closebtn").addEventListener("click", () => {
+    document.querySelector(".longread_container").classList.add("hidden");
+});
+
+document.querySelector("#minimizebtn").addEventListener("click", () => {
+    document.querySelector("#hidebox").style.minWidth = document.querySelector("#hidebox").clientWidth + "px";
+    document.querySelector(".infobox").classList.add("minimized");
+    document.querySelector("#minimizebtn").classList.add("hidden");
+    document.querySelector("#unminimizebtn").classList.remove("hidden");
+    //document.querySelector("#hidebox").classList.add("hidden");
+});
+
+document.querySelector("#unminimizebtn").addEventListener("click", () => {
+    document.querySelector("#unminimizebtn").classList.add("hidden");
+    document.querySelector("#minimizebtn").classList.remove("hidden");
+    document.querySelector(".infobox").classList.remove("minimized");
+    setTimeout(() => document.querySelector("#hidebox").style.minWidth = "", 250);
+    //setTimeout(() => document.querySelector("#hidebox").classList.remove("hidden"), 400);
+    //document.querySelector("#hidebox").classList.remove("hidden");
+});
+
+
+app.should_speak = false;
+app.play = function(lst) {
+    // If we're already playing, stop them - assume same path as resource file
+    document.querySelectorAll("audio.tts").forEach( i => i.parentElement.removeChild(i));
+
+    // baseurl of resource file:
+    let base = app.resource.substr(0, app.resource.lastIndexOf("/") + 1);
+
+    let idx = 0;
+    let a = document.createElement("audio");
+    a.src = base + app.information.snd_title;
+    let done = function() {
+        idx++;
+        if (idx < lst.length) {
+            a.src = base + lst[idx];
+            a.play()
+        } else {
+            try {
+                a.parentElement.removeChild(a);
+            } catch (e) {
+                // Already cleaned up
+            }
+        }
+    }
+    a.addEventListener("ended", () => done());
+    // a.addEventListener("paused", () => done());
+    a.classList.add("tts");
+    a.play();
+    document.querySelector("body").appendChild(a);
+}
+document.querySelector("#playshortbtn").addEventListener("click", () => {
+
+    if (document.querySelector("audio.tts")) {
+        document.querySelectorAll("audio.tts").forEach( i => i.parentElement.removeChild(i));
+        return;
+    } 
+
+    // If we have prepared sound files, use them, otherwise go TTS
+    if (app.information.snd_title && app.information.snd_intro) {
+        let l = [app.information.snd_title,
+                  app.information.snd_intro];
+        if (app.information.snd_short) {
+            l.push(app.information.snd_short)
+        }
+        app.play(l)
+        return;
+    }
+
+    if (responsiveVoice.isPlaying()) {
+        return stop_speaking();
+    }
+    app.should_speak = true;
+    speak(app.information.title)
+        .then(() => {
+            speak(app.information.intro)
+            .then(() => {
+                speak(app.information.short_text);
+            });
+        });
+});
+
+document.querySelector("#playlongbtn").addEventListener("click", () => {
+
+    if (document.querySelector("audio.tts")) {
+        document.querySelectorAll("audio.tts").forEach( i => i.pause());
+        return;
+    } 
+
+    // If we have prepared sound files, use them, otherwise go TTS
+    if (app.information.snd_long) {
+        app.play([app.information.snd_title, app.information.snd_long])
+        return;
+    }
+
+    if (responsiveVoice.isPlaying()) {
+        return stop_speaking();
+    }
+    app.should_speak = true;
+
+    let recurse_speak = function(iter) {
+        if (iter >= app.information.texts.length) return;
+        let item = app.information.texts[iter];
+        if (item) {
+            speak(item.text).then(() => recurse_speak(iter+1));
+        }
+    };
+    let text = app.information.title + "\n";
+    speak(app.information.title)
+        .then(() => speak(app.information.intro + " - " + app.information.short_text) .then(() => recurse_speak(0))
+        )
+});
+
+
+/******************************************
+ * Search for images using camera
+ *
+ ******************************************/
+let snap_interval;
+let search_url = "https://seer2.itek.norut.no/qr/";
+
+document.querySelector("#cancelbtn").addEventListener("click", () => {
+    document.querySelector(".imagesearch").classList.add("hidden");
+    // Stop the recording
+    stop_video();
+});
+async function postData(url, data) {
+  // Default options are marked with *
+  const response = await fetch(url, {
+    method: 'POST',
+    mode: 'cors', // no-cors, *cors, same-origin
+    cache: 'no-cache',
+    credentials: 'same-origin', // include, *same-origin, omit
+    headers: {
+      'Content-Type': 'image/jpg'
+    },
+    redirect: 'follow',
+    referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+    body: data
+  });
+  return response.json(); // parses JSON response into native JavaScript objects
+}
+let video = document.querySelector("#video");
+//let click_button = document.querySelector("#click-photo");
+let canvas = document.querySelector("#canvas");
+
+document.querySelector("#searchbtn").addEventListener('click', async function() {
+    document.querySelector(".imagesearch").classList.remove("hidden");
+    let stream = await navigator.mediaDevices.getUserMedia({ audio:false, video: {facingMode: "environment"}, audio: false });
+    video.srcObject = stream;
+    snap_interval = setInterval(snap_n_check, 1000);
+});
+
+let stop_video = function() {
+    video.srcObject.getTracks().forEach(function(track) {
+        track.stop();
+    });
+    clearInterval(snap_interval);
+}
+let chooseItem = function(item) {
+    stop_video();
+    load_resource(item[0]);
+    document.querySelector(".imagesearch").classList.add("hidden");
+}
+
+let observations = {};
+let addOrUpdate = function(item, options) {
+    options = options || {};
+    if (options.clear) {
+        observations = {};
+        document.querySelector(".resultlist").innerHTML = "";
+    }
+    if (!item) return;
+
+    if (observations[item[0]] && observations[item[0]].id) {
+        let d = document.querySelector(".result#" + observations[item[0]].id);
+        d.querySelector(".info").innerHTML = Math.floor(parseFloat(item[1]) * 100);
+        if (!options.topscore) {
+            d.classList.remove("topscore");
+            observations[item[0]].maxScores = 0;
+        } else {
+            d.classList.add("topscore");
+            observations[item[0]].maxScores++;
+            console.log(item[0], "has the top score");
+            if (observations[item[0]].maxScores >= 3) {
+                // Choose it by default
+                chooseItem(item);
+            }
+        }
+        return;
+    }
+
+    observations[item[0]] = {
+        id: "itm" + String(Math.random()).replace(".", ""), 
+        maxScores: options.maxscore ? 1 : 0
+    }
+
+    let template = document.querySelector("#resulttemplate");
+    const clone = template.content.cloneNode(true);
+    let d = clone.querySelector(".result");
+    d.setAttribute("id", observations[item[0]].id);
+    d.style.backgroundImage = "url(" + item[0] + ")";
+    d.score = Math.floor(parseFloat(item[1]) * 100);
+
+    d.querySelector(".info").innerHTML = d.score;
+    if (options.topscore) {
+        d.classList.add("topscore");
+    }
+
+    d.addEventListener("click", e => chooseItem(item));
+
+    document.querySelector(".resultlist").appendChild(d);
+}
+
+let snap_n_check = function() {
+    canvas.style.width = video.width;
+    canvas.style.height = video.height;
+
+    canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+    let image_data_url = canvas.toDataURL('image/jpeg');
+    // data url of the image
+    canvas.toBlob((data) => {
+        let res = postData(search_url, data);
+        res.then((response) => {
+            if (response.length > 0) {
+                // If the best hit is very good, go for it
+                if (response[0][1] > 0.8) {
+                    chooseItem(response[0]);
+                    return;
+                }
+                let maxScore;;
+                if (response.length == 0)
+                    maxScore = response[0][1];
+
+                // If they are too close to each other, ignore
+                if (response.length > 1 &&  (response[0][1] - response[1][1] > 0.1)) {
+                    maxScore = response[0][1];
+                }
+
+                for (let idx=0; idx<response.length; idx++) {
+                    addOrUpdate(response[idx], {"topscore": idx == 0});
+                }
+            } else {
+                // Clear results
+                addOrUpdate(undefined, {"clear": true});
+            }
+            
+        });
+    });
+
+};
+
+</script>
+
+</body>
+</html>
