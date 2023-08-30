@@ -98,3 +98,6 @@ guessed, it is returned to the user's device.
 It's not known how many different images the Qart service can identify, and
 the more similar pieces of art the more difficult it will be to identify them
 properly. This needs to be tested.
+
+A palette is also created for each art piece, ensuring that somewhat sensible
+font and background colors are selected that fit the image.
